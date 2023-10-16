@@ -3,6 +3,7 @@ import './App.css';
 import Account from './pages/Account';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import CompanyInfo from './pages/CompanyInfo';
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Account />} />
         <Route path="/account" element={<Account />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/CompanyInfo" element={<CompanyInfo/>} />
       </Routes>
 
     </div>

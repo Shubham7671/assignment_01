@@ -14,7 +14,7 @@ export default function Navbar() {
                     <h2>GEEKSYNERGY</h2>
                 </div>
                 <div>
-                    <div><p>Company Info</p> </div>
+                    <div onClick={() => navigate('/companyInfo')}><p >Company Info</p> </div>
                     <div onClick={() => navigate('/account')}><p>Login</p></div>
                 </div>
 

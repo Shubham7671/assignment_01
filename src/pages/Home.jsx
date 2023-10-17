@@ -7,28 +7,33 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function Home() {
-    const [apiData, setApiData] = useState();
+    const [apiData, setApiData] = useState([]);
+    const [loader,setLoader]=useState(false);
 
     const navigate = useNavigate();
 
 
     async function getTheData() {
+        setLoader(true)
         try {
             const data = await getTheDatafromApi();
-            console.log(data.result)
             setApiData(data.result);
         } catch (err) {
             console.log(err)
+        }finally{
+            setLoader(false)
         }
     }
-
+    // getTheData();
     useEffect(() => {
         if (!getLoginStatus()) {
             navigate('/account')
         }
-        getTheData()
+        getTheData();
     }, [])
     return (
+
+        !loader ?
         <div className='movie-container'>
             <h2 style={{ textAlign: "center" }}>Movie List</h2>
             {apiData?.map((el) => {
@@ -61,6 +66,6 @@ export default function Home() {
                 </div>
             })}
 
-        </div>
+        </div>:<div style={{width:"10%",margin:"50px auto"}}><h4>Loading...</h4></div>
     )
 }

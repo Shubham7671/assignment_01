@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getTheDatafromApi } from '../services/api';
+import { getLoginStatus } from '../utils/store';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -7,7 +9,7 @@ import { getTheDatafromApi } from '../services/api';
 export default function Home() {
     const [apiData, setApiData] = useState();
 
-
+    const navigate = useNavigate();
 
 
     async function getTheData() {
@@ -21,6 +23,9 @@ export default function Home() {
     }
 
     useEffect(() => {
+        if (!getLoginStatus()) {
+            navigate('/account')
+        }
         getTheData()
     }, [])
     return (
@@ -30,7 +35,7 @@ export default function Home() {
                 const { poster, totalVoted, title, director, stars, genre, runTime, language, releasedDate, pageViews } = el;
 
                 return <div key={el._id} className='movie-card-container' >
-                    
+
                     <div className='movie-card'>
                         <div>
                             <i className="fa-solid fa-caret-up"></i>
@@ -48,7 +53,7 @@ export default function Home() {
                             <p>Starring: {stars.join(', ')}</p>
                             <p><span> {runTime} min | </span> <span>{language} </span><span> | {releasedDate}</span></p>
                             <p><span>{pageViews} Views</span> | Voted by {totalVoted} people</p>
-                            
+
                         </div>
 
                     </div>

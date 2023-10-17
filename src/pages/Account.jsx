@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Flip, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { getDataFromLocalStorage, setDataToLocalStorage } from '../utils/store';
+import { getDataFromLocalStorage, setDataToLocalStorage, setLoginStatus } from '../utils/store';
 
-export default function Account() {
-    const [usersData,setUsersData] = useState([])
+export default function Account({ setloginStatus }) {
+    const [usersData, setUsersData] = useState([])
     const [accountStatus, setAccountStatus] = useState("login");
     const [login, setLogin] = useState({ email: "", password: "" });
     const [signUp, setSignUp] = useState({ email: "", password: "", mobile: "", name: "" });
@@ -20,8 +20,9 @@ export default function Account() {
 
         if (user) {
             toast.success("Sucessfully Logged In !");
-  
-               setLogin({ email: "", password: "" })
+            setLogin({ email: "", password: "" });
+            setLoginStatus(true);
+            setloginStatus(true);
             setTimeout(() => {
                 navigate('/home')
             }, 2000)
@@ -56,16 +57,16 @@ export default function Account() {
         }
         toast.success("Account Sucessfully Created !");
         setDataToLocalStorage(signUp);
-        setUsersData([...usersData,signUp]);
-        setTimeout(()=>{
+        setUsersData([...usersData, signUp]);
+        setTimeout(() => {
             setAccountStatus("login");
             setSignUp({ email: "", password: "", mobile: "", name: "" })
-        },1000)
+        }, 1000)
     }
 
 
 
-// functions for form validation
+    // functions for form validation
 
     const validateEmail = (email) => {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -80,10 +81,10 @@ export default function Account() {
     };
 
 
-    useEffect(()=>{
-      const res=getDataFromLocalStorage();
-      setUsersData(res);
-    },[])
+    useEffect(() => {
+        const res = getDataFromLocalStorage();
+        setUsersData(res);
+    }, [])
 
     return (
         <section className='account-section'>
@@ -94,7 +95,7 @@ export default function Account() {
                         <label htmlFor="">Email or Phone</label>
                         <input type="text" value={login.email} onChange={(e) => setLogin({ ...login, email: e.target.value })} required />
                         <label htmlFor="">Password</label>
-                        <input type="text" value={login.password} onChange={(e) => setLogin({ ...login, password: e.target.value })} required />
+                        <input type="password" value={login.password} onChange={(e) => setLogin({ ...login, password: e.target.value })} required />
                         <button>Sign in</button>
                         <button onClick={() => setAccountStatus('signUp')}>Create A New Account</button>
                     </form>) :
@@ -115,7 +116,7 @@ export default function Account() {
                         }} required />
                         {errorMessage.mobile && <span>{errorMessage.mobile}</span>}
                         <label htmlFor="" >Password</label>
-                        <input type="text" value={signUp.password} onChange={(e) => {
+                        <input type="password" value={signUp.password} onChange={(e) => {
                             setSignUp({ ...signUp, password: e.target.value });
                             setErrorMessage({ ...errorMessage, password: '' });
                         }} required />

@@ -29,9 +29,7 @@ nav>div {
   cursor: pointer;
 }
 
-nav>div:nth-child(2)>div {
-  margin: 0px 9px;
-}
+
 
 nav h2 {
   margin-left: 5px;
@@ -45,6 +43,62 @@ nav p {
 
 nav img {
   width: 45px;
+}
+.drop-down-container{
+  font-weight: 700;
+}
+.drop-down-container i {
+  font-weight: 700;
+}
+
+.drop-down-container ul {
+  list-style: none;
+  display: flex;
+  margin-left: -20px;
+}
+
+.drop-down-container ul li {
+  position: relative;
+  cursor: pointer;
+
+}
+
+.drop-down-container ul li:hover {
+  color: black;
+}
+
+.drop-down-container .drop-down {
+  position: absolute;
+  right: -10px;
+  top: 40px;
+  transform: translateX(0%);
+  background-color: white;
+  height: auto;
+  min-width: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.1rem 0;
+  visibility: hidden;
+  opacity: 0;
+
+}
+
+.drop-down-container ul li:hover>.drop-down {
+  visibility: visible;
+  opacity: 1;
+}
+
+.drop-down-container .drop-down li {
+  height: 3rem;
+  line-height: 3rem;
+  width: 100%;
+  text-align: center;
+  transition: all .3s linear;
+}
+
+.drop-down-container .drop-down li:hover {
+  background-color: gray;
 }
 
 /* ---------------------------------------------Account page----------------------------------- */
@@ -123,7 +177,7 @@ nav img {
 
 .movie-card img {
   width: 100%;
-  height: 100%;
+
   border-radius: 8px;
 }
 
@@ -143,6 +197,7 @@ nav img {
 .movie-card>div:nth-child(1) h2 {
   margin: 0;
 }
+
 
 .movie-card>div:nth-child(3) {
   padding-left: 10px;

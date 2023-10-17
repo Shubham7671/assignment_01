@@ -13,7 +13,7 @@ export const getTheDatafromApi = async () => {
                 sort: "voting"
             })
         })
-      return data.json();
+        return data.json();
 
     } catch (err) {
         console.log(err)

@@ -24,12 +24,12 @@ export default function Home() {
             setLoader(false)
         }
     }
-    // getTheData();
+   
     useEffect(() => {
         if (!getLoginStatus()) {
             navigate('/account')
         }
-        getTheData();
+       getTheData();
     }, [])
     return (
 

@@ -13,11 +13,13 @@ function App() {
 
   return (
     <div className="main">
-      <Navbar setloginStatus={setloginStatus} loginStatus={loginStatus} />
 
+      <Navbar setloginStatus={setloginStatus} loginStatus={loginStatus} />
       <Routes>
-        <Route path="/" element={<Account setloginStatus={setloginStatus} />} />
+
+        {/* <Route path="/" element={<Account setloginStatus={setloginStatus} />} /> */}
         <Route path="/account" element={<Account setloginStatus={setloginStatus} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/CompanyInfo" element={<CompanyInfo />} />
       </Routes>

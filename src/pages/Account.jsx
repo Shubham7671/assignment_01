@@ -24,7 +24,7 @@ export default function Account({ setloginStatus }) {
             setLoginStatus(true);
             setloginStatus(true);
             setTimeout(() => {
-                navigate('/home')
+                navigate('/')
             }, 2000)
         } else {
             let email = usersData.find(user => (user.email == login.email || user.mobile == (login.email)))
